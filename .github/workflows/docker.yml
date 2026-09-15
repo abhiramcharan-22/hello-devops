@@ -15,3 +15,13 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t abhiram-devops-web:latest .
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'abhiram-devops-web:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+cat .github/workflows/docker.yml
